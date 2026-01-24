@@ -15,7 +15,7 @@ app.get('/api/home', async (req, res) => {
     })
     const json = await response.json()
     const records = json.data?.records || []
-    const dramas = records.flatMap(s => (s.items || []).map(i => ({ bookId: i.bookId, bookName: i.bookName, cover: i.image, labels: i.labels || [] })))
+    const dramas = records.flatMap(s => (s.items || []).map(i => ({ bookId: i.bookId, bookName: i.bookName, cover: i.image || i.cover, labels: i.labels || [] })))
     res.json({ data: dramas })
   } catch (err) { res.status(500).json({ error: err.message }) }
 })
